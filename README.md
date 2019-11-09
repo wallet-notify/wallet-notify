@@ -7,7 +7,35 @@ Set of tools to create and process wallet notifications
 yarn add wallet-notify
 ```
 
-# Send notification
+## Notification format
+```js
+{
+  text: "Hello, I'm a wallet notification!", // <-- required
+  thumbnailUrl: "https://me.com/my-logo.gif",
+}
+
+// OR
+
+{
+  text: "Hello, I'm a wallet notification. Click to go to my website.", // <-- required
+  thumbnailUrl: "https://me.com/my-logo.gif",
+  actionUrl: "https://me.com/do-that-thing"
+}
+
+// OR
+
+{
+  text: 'Hello, I’m a wallet notification. Click to buy crypto kitty', // <-- required
+  thumbnailUrl: "https://me.com/my-logo.gif",
+  actionTx: {
+    to: '0x...', // <-- required
+    amount: 0,
+    data: '0xdeadbeef'
+  }
+}
+```
+
+## Send notification
 ```js
 import WalletNotify from 'wallet-notify'
 
@@ -20,7 +48,7 @@ const notification = {
 const tx = await WalletNotify.send({
   notification
   to: addressOrAddressArray,
-  provider: web3provider
+  web3: web3,
   gasPrice: gasPrice,
   gasLimit: gasLimit,
 })
@@ -35,7 +63,7 @@ const tx = await provider.transactionSend({
 
 ```
 
-# Receive notification
+## Receive notification
 ```js
 import WalletNotify from 'wallet-notify'
 
