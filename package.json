@@ -1,0 +1,9 @@
+{
+  "name": "wallet-notify",
+  "version": "1.0.0",
+  "description": "Set of tools to create and process wallet notifications",
+  "main": "index.js",
+  "repository": "git@github.com:wallet-notify/wallet-notify.git",
+  "author": "Roman Pavlovskyi <rpavlovskyi@gmail.com>",
+  "license": "MIT"
+}
