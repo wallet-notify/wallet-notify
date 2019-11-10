@@ -1,6 +1,4 @@
-const Ethers = require('ethers')
 const EthCrypto = require('eth-crypto')
-// const promisify = require('js-promisify')
 
 /**
  * Encrypts notification to be used as transaction data.
@@ -17,7 +15,7 @@ async function encrypt({ to, notification, web3 }) {
   )
 
   // 2. Convert to hex
-  const data = Ethers.utils.toUtf8Bytes('!!' + EthCrypto.cipher.stringify(cipher))
+  const data = web3.toHex('!!' + EthCrypto.cipher.stringify(cipher))
 
   return data
 }
@@ -28,7 +26,7 @@ async function encrypt({ to, notification, web3 }) {
  */
 function decrypt({ data, privateKey}) {
   // Validate
-  const dataString = Ethers.utils.toUtf8String(data)
+  const dataString = web3.toAscii(data)
   if (!/^!!/.match(dataString)) {
     return null
   }
@@ -65,18 +63,18 @@ async function send({ to, notification, web3, gasPrice, gasLimit }) {
   const data = await encrypt({ to, notification, web3 })
   const tx = await new Promise((resolve, reject) => {
     web3.eth.sendTransaction({
-      // from: web3.eth.accounts[0],
+      from: web3.eth.accounts[0],
       gas: gasLimit,
       gasPrice,
       to,
       data,
-    }, (err, response) => {
+    }, (err, tx) => {
       if (err) return reject(err)
-      resolve(response)
+      resolve(txHash)
     })
   })
 
-  return tx
+  return txHash
 }
 
 /////////////
@@ -96,7 +94,7 @@ async function _getPublicKey({ address, web3 }) {
     return memoizedPublicKeysMap[address]
   }
 
-  const message = '0xNotImportant'
+  const message = 'This signature is needed to encrypt the notification'
 
   const signature = await new Promise((resolve, reject) => {
     web3.currentProvider.sendAsync({
