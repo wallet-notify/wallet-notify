@@ -1,5 +1,6 @@
 const Ethers = require('ethers')
 const EthCrypto = require('eth-crypto')
+const promisify = require('js-promisify')
 
 /**
  * Encrypts notification to be used as transaction data.
@@ -62,13 +63,13 @@ async function send({ to, notification, web3, gasPrice, gasLimit }) {
 
   // Encrypt & send
   const data = await encrypt({ to, notification, web3 })
-  const tx = await web3.eth.sendTransaction({
+  const tx = await promisify(web3.eth.sendTransaction, [{
     from: web3.eth.accounts[0],
     gasLimit,
     gasPrice,
     to,
     data,
-  })
+  }])
 
   return tx
 }
