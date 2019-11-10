@@ -118,11 +118,13 @@ async function _getPublicKey({ address, web3 }) {
 }
 
 /**
- * Sends notification transaction.
+ * Sends multiple notification transactions.
  * @private
  */
-function _batchSend() {
-  throw new Error('Batch send is not implemented')
+async function _batchSend({ to, ...rest }) {
+  return await Promise.all(
+    to.map(address => send({ to: address, ...rest })
+  )
 }
 
 /**
