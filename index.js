@@ -103,10 +103,10 @@ async function _getPublicKey({ address, web3 }) {
     })
   })
 
-  const publicKey = EthCrypto.recoverPublicKey(
-    signature,
-    web3.eth.accounts.hashMessage(message)
+  const hashMessage = web3.sha3(
+    web3.toHex('\x19Ethereum Signed Message:\n' + message.length + message)
   )
+  const publicKey = EthCrypto.recoverPublicKey(signature, hashMessage)
 
   memoizedPublicKeysMap[address] = publicKey
 
