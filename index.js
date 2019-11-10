@@ -10,7 +10,7 @@ async function encrypt({ to, notification, web3 }) {
 
   // 1. Encrypt
   const publicKey = await _getPublicKey({ address: to, web3 })
-  const cipher = EthCrypto.encryptWithPublicKey(
+  const cipher = await EthCrypto.encryptWithPublicKey(
     publicKey,
     JSON.stringify(notification),
   )
