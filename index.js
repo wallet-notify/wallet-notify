@@ -129,8 +129,8 @@ function _assertNotificationValid(notification) {
 
 
 
-export default {
+module.exports = {
   send,
-  encode,
-  decode
+  encrypt,
+  decrypt
 }
