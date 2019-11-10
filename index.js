@@ -9,7 +9,7 @@ async function encrypt({ to, notification, web3 }) {
   _assertNotificationValid(notification)
 
   // 1. Encrypt
-  const publicKey = await getPublicKey({ address: to, web3 })
+  const publicKey = await _getPublicKey({ address: to, web3 })
   const cipher = EthCrypto.encryptWithPublicKey(
     publicKey,
     JSON.stringify(notification),
