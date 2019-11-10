@@ -49,6 +49,8 @@ function decrypt({ data, privateKey}) {
  * Sends notification transaction to a specified recipient or a list of recipients.
  */
 async function send({ to, notification, web3, gasPrice, gasLimit }) {
+  // Validate
+  _assertNotificationValid(notification)
 
   if (Array.isArray(to) && to.length > 1) {
     return _batchSend({ to, notification, web3, gasPrice, gasLimit })
@@ -58,6 +60,7 @@ async function send({ to, notification, web3, gasPrice, gasLimit }) {
     throw new Error('Invalid call - "to" can’t be an empty array')
   }
 
+  // Encrypt & send
   const data = await encrypt({ to, notification, web3 })
   const tx = await web3.eth.sendTransaction({
     gasLimit,
@@ -127,7 +130,7 @@ function _assertNotificationValid(notification) {
   }
 
   if (
-    (notification.thumbnailUrl && !_validUrl(notification.thumbnailUrl)))
+    (notification.thumbnailUrl && !_validUrl(notification.thumbnailUrl))
     ||
     (notification.tu && !_validUrl(notification.tu))
   ) {
