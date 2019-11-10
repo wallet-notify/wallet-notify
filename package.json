@@ -1,0 +1,20 @@
+{
+  "name": "wallet-notify",
+  "version": "0.3.0",
+  "description": "Set of tools to create and process wallet notifications",
+  "main": "index.js",
+  "repository": "git@github.com:wallet-notify/wallet-notify.git",
+  "author": "Roman Pavlovskyi <rpavlovskyi@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "eth-crypto": "^1.5.0"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "sinon": "^7.5.0",
+    "web3": "0.20.7"
+  }
+}
