@@ -63,6 +63,7 @@ async function send({ to, notification, web3, gasPrice, gasLimit }) {
   // Encrypt & send
   const data = await encrypt({ to, notification, web3 })
   const tx = await web3.eth.sendTransaction({
+    from: web3.eth.accounts[0],
     gasLimit,
     gasPrice,
     to,
