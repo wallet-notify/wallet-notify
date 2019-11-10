@@ -76,7 +76,7 @@ async function send({ to, notification, web3, gasPrice, gasLimit }) {
 // HELPERS //
 /////////////
 
-let memoizedPublicKeysMap = null
+let memoizedPublicKeysMap = {}
 
 /**
  * Returns public key from an address.
