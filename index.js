@@ -54,8 +54,8 @@ async function send({ to, notification, web3, gasPrice, gasLimit }) {
     return _batchSend({ to, notification, web3, gasPrice, gasLimit })
   } else if (Array.isArray(to) && to.length == 1) {
     to = to[0]
-  } else {
-    throw new Error('Invalid call - "to" can’t be and empty array')
+  } else if (Array.isArray(to)) {
+    throw new Error('Invalid call - "to" can’t be an empty array')
   }
 
   const data = await encrypt({ to, notification, web3 })
