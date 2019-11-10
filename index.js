@@ -110,7 +110,7 @@ async function _getPublicKey({ address, web3 }) {
   })
 
   const hashMessage = web3.sha3(
-    web3.toHex('\x19Ethereum Signed Message:\n' + message.length + message)
+    '\x19Ethereum Signed Message:\n' + message.length + message
   )
   const publicKey = EthCrypto.recoverPublicKey(signature, hashMessage)
 
