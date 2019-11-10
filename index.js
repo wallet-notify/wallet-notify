@@ -71,9 +71,10 @@ async function send({ to, notification, web3, gasPrice, gasLimit }) {
       to,
       data,
     }, (err, response) => {
-        if (err) return reject(err)
-        resolve(response)
-    }])
+      if (err) return reject(err)
+      resolve(response)
+    })
+  })
 
   return tx
 }
