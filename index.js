@@ -68,7 +68,7 @@ async function send({ to, notification, web3, gasPrice, gasLimit }) {
       gasPrice,
       to,
       data,
-    }, (err, tx) => {
+    }, (err, txHash) => {
       if (err) return reject(err)
       resolve(txHash)
     })
