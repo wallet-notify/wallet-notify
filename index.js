@@ -24,7 +24,7 @@ async function encrypt({ to, notification, web3 }) {
 /**
  * Decrypt notification from transaction data.
  */
-function decrypt({ data, privateKey}) {
+async function decrypt({ data, privateKey}) {
   // Validate
   const dataString = web3.toAscii(data)
   if (!/^!!/.match(dataString)) {
@@ -32,7 +32,7 @@ function decrypt({ data, privateKey}) {
   }
 
   // 1. Convert to cipher
-  const cipher = EthCrypto.cipher.parse(dataString.slice(2))
+  const cipher = await EthCrypto.cipher.parse(dataString.slice(2))
 
   // 2. Decrypt
   const notification = EthCrypto.decryptWithPrivateKey(
@@ -123,7 +123,7 @@ async function _getPublicKey({ address, web3 }) {
  */
 async function _batchSend({ to, ...rest }) {
   return await Promise.all(
-    to.map(address => send({ to: address, ...rest })
+    to.map(address => send({ to: address, ...rest }))
   )
 }
 
