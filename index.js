@@ -16,7 +16,7 @@ async function encrypt({ to, notification, web3 }) {
   )
 
   // 2. Convert to hex
-  const data = Ethers.utils.toUtf8Bytes('!!' + EthCrypto.cipher.stringify(encrypted))
+  const data = Ethers.utils.toUtf8Bytes('!!' + EthCrypto.cipher.stringify(cipher))
 
   return data
 }
