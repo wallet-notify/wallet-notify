@@ -122,9 +122,35 @@ function _batchSend() {
  * @private
  */
 function _assertNotificationValid(notification) {
-  if (!notification.text || !notification.t) {
+  if (!notification.text && !notification.t) {
     throw new Error('Invalid Notification - required text field is missing')
   }
+
+  if (
+    (notification.thumbnailUrl && !_validUrl(notification.thumbnailUrl)))
+    ||
+    (notification.tu && !_validUrl(notification.tu))
+  ) {
+    throw new Error('Invalid Notification - thumbnailUrl is not a valid URL')
+  }
+
+  if (
+    (notification.actionUrl && !_validUrl(notification.actionUrl))
+    ||
+    (notification.au && !_validUrl(notification.au))
+  ) {
+    throw new Error('Invalid Notification - actionUrl is not a valid URL')
+  }
+}
+
+function _validURL(str) {
+  var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  return !!pattern.test(str);
 }
 
 
