@@ -33,6 +33,14 @@ yarn add wallet-notify
     data: '0xdeadbeef'
   }
 }
+
+// OR
+
+{
+  t: 'Hello, I’m a short version notation notification',
+  tu: 'http://smal.co/pic.gif'
+  au: 'http://smal.co'
+}
 ```
 
 ## Send notification
